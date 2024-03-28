@@ -4,7 +4,20 @@ from openpyxl import load_workbook
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+
+import os
 import matplotlib.font_manager as fm
+
+@st.cache_data
+def fontRegistered():
+    font_dirs = [os.getcwd() + '/font_directory']
+    font_files = fm.findSystemFonts(fontpaths=font_dirs)
+
+    for font_file in font_files:
+        
+        fm.fontManager.addfont(font_file)
+
+    fm._load_fontmanager(try_read_cache=False)
 
 # 파일 업로더 위젯
 file_path = st.file_uploader("파일을 선택해주세요", type=['xlsx'])
@@ -103,33 +116,36 @@ st.write("""
 - **중간 점수 컬러:** 검사자의 성격적 중간 에너지 사용
 - **최하 점수 컬러:** 검사자의 소극적 성격 특성
 """)
-# 한글 폰트 설정
-plt.rcParams['font.size'] = 12
-plt.rcParams['font.family'] = 'Malgun Gothic'  # 여기서 폰트를 시스템에 설치된 한글 지원 폰트로 변경
-plt.rcParams['axes.unicode_minus'] = False  # 마이너스 기호가 정상적으로 표시되도록 설정
-# 그래프 그리기
-if not student_scores_df.empty and 'Error' not in student_scores_df.columns:
-    # Extract scores and columns
-    colors = student_scores_df.columns.values
-    scores = student_scores_df.iloc[0].values
-
-    # Create the linear plot
-    plt.figure(figsize=(10, 6))
-    plt.plot(colors, scores, marker='o', linestyle='-', color='b')
-
-    # Annotate each point with its score
-    for i, score in enumerate(scores):
-        plt.text(colors[i], score + 0.5, str(score), ha='center', va='bottom', fontsize=10)
-
-    # Adding title and labels
-    plt.title(f'Score Distribution for {selected_student}')
-    plt.xlabel('Subject')
-    plt.ylabel('Score')
-    plt.grid(True)
-
-    # Display the plot in Streamlit
-    st.pyplot(plt)
-
+def main():
+    fontRegistered()
+    fontname = 'Malgun Gothic'
+    # 한글 폰트 설정
+    plt.rc('font', family=fontname)
+    # 그래프 그리기
+    if not student_scores_df.empty and 'Error' not in student_scores_df.columns:
+        # Extract scores and columns
+        colors = student_scores_df.columns.values
+        scores = student_scores_df.iloc[0].values
+    
+        # Create the linear plot
+        plt.figure(figsize=(10, 6))
+        plt.plot(colors, scores, marker='o', linestyle='-', color='b')
+    
+        # Annotate each point with its score
+        for i, score in enumerate(scores):
+            plt.text(colors[i], score + 0.5, str(score), ha='center', va='bottom', fontsize=10)
+    
+        # Adding title and labels
+        plt.title(f'Score Distribution for {selected_student}')
+        plt.xlabel('Subject')
+        plt.ylabel('Score')
+        plt.grid(True)
+    
+        # Display the plot in Streamlit
+        st.pyplot(plt)
+        
+if __name__ == "__main__":
+    main()
 color_info_dict_full = {'purple': {'요약': '독창성과 신비로운 보라',
   '성격상 강점': '자신을 특별하다고 여기며 독특한 매력을 인정받고 싶어함.\n정신적이고 신비로운 것에 끌리며 탐구력을 보임.\n믿음과 신뢰를 구축한 사람은 끝까지 함께하며 책임감을 가짐.\n변화와 안정감 두 개의 마음을 가짐.\n관계 중시.\n자신이 선택한 것에 책임감을 가짐.',
   '성격상 약점': '양가감정이 있어 변덕스럽거나 감정기복이 있음.\n정신적인 것을 너무 추구하면 고독, 불안, 우울이 있을 수 있음.\n정체성의 혼란이 있을 수 있음.\n타인과 구별되는 우월감을 가짐.',
