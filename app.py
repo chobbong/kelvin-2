@@ -190,22 +190,47 @@ color_info_dict_full = {'purple': {'요약': '독창성과 신비로운 보라',
 # 홍길동의 가장 높은 점수를 받은 색깔 찾기
 highest_score_color = student_scores_df.idxmax(axis=1).iloc[0]
 
+# Streamlit 앱에서 사용할 CSS 정의
+custom_css = """
+    <style>
+        .custom-box {
+            border: 1px solid #f3f3f3;
+            border-radius: 5px;
+            background-color: #f3f3f3;
+            padding: 10px;
+            font-weight: bold;
+        }
+    </style>
+"""
+st.markdown(custom_css, unsafe_allow_html=True)
 # 해당 색깔의 정보 추출
 highest_score_color_info = color_info_dict_full[highest_score_color]
-
+color_info = highest_score_color_info['요약']
 # 색상 정보를 보다 구조화된 형태로 출력
-st.write(f"최고 점수 색상: {highest_score_color}")
-st.write(f"요약: {highest_score_color_info['요약']}")
+st.markdown(f'<div class="custom-box">최고 점수 색상 : {highest_score_color}</div>', unsafe_allow_html=True)
+# <br> 태그를 사용하여 공백 추가
+st.markdown('<br>', unsafe_allow_html=True)
+st.write(f'<div class="custom-box">요약 : {color_info}</div>',unsafe_allow_html=True)
 
 # 성격상 강점 및 약점에서 줄바꿈 문자를 쉼표로 교체하여 출력
+
 character_strengths = highest_score_color_info['성격상 강점'].replace('\n', ', ')
 character_weaknesses = highest_score_color_info['성격상 약점'].replace('\n', ', ')
 
-st.write(f"성격상 강점: {character_strengths}")
-st.write(f"성격상 약점: {character_weaknesses}")
+
+st.markdown('<br>', unsafe_allow_html=True)
+st.write(f'<div class="custom-box">성격성강점</div>',unsafe_allow_html=True)
+st.write(f"{character_strengths}")
+
+st.markdown('<br>', unsafe_allow_html=True)
+st.write(f'<div class="custom-box">성격성약점</div>',unsafe_allow_html=True)
+st.write(f"{character_weaknesses}")
 
 # 추천 직업 출력
-st.write(f"추천 직업: {highest_score_color_info['추천 직업']}")
+st.markdown('<br>', unsafe_allow_html=True)
+st.write(f'<div class="custom-box">추천 직업</div>',unsafe_allow_html=True)
+st.write(f"{highest_score_color_info['추천 직업']}")
+
 
 # 'character' 시트의 Emotion 정보를 사용하여 문제 ID를 색깔별로 그룹화합니다.
 emotion_groups_new = character_sheet[['Question', 'Emotion']].set_index('Question')['Emotion'].to_dict()
