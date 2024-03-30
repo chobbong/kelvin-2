@@ -309,5 +309,8 @@ for label, angle, score in zip(labels, angles, scores):
 ax.set_yticklabels([])
 
 # Streamlit에 그래프 표시
-st.pyplot(fig)
+col1, col2, col3 = st.columns([2,6,2])
+
+with col2:
+    st.pyplot(fig)
 
