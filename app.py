@@ -273,7 +273,7 @@ st.write("(최고점 50점~최하점 10점)")
 def get_sorted_scores_df_by_input(student_name):
     if student_name in sorted_scores_df_uploaded_emotion.index:
         student_scores = sorted_scores_df_uploaded_emotion.loc[student_name].sort_values(ascending=False)
-        return pd.DataFrame(student_scores).T
+        return pd.DataFrame(student_scores)
     else:
         return pd.DataFrame({"Error": ["Student name not found."]})
 
