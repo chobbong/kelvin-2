@@ -301,11 +301,11 @@ ax.plot(angles, scores, color='red', linewidth=2)
 
 # 각 점수 라벨 그리기
 ax.set_xticks(angles[:-1])
-ax.set_xticklabels(labels, fontsize=13)
+ax.set_xticklabels(labels, fontsize=20)
 
 # 각 점수에 대해 주석 달기
 for label, angle, score in zip(labels, angles, scores):
-    ax.text(angle, score, str(score), ha='center', va='center', fontsize=12, color='blue')
+    ax.text(angle, score, str(score), ha='center', va='center', fontsize=20, color='blue')
 
 ax.set_yticklabels([])
 
