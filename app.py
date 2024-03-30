@@ -282,7 +282,8 @@ def get_sorted_scores_df_by_input(student_name):
 # 결과 표시
 student_scores_df_emotion = get_sorted_scores_df_by_input(selected_student)
 student_scores_df_emotion.drop(student_scores_df_emotion.columns[0], axis=1, inplace=True)
-st.write(student_scores_df_emotion)
+student_scores_df_emotion_transposed = student_scores_df_emotion.transpose()
+
 
 labels = student_scores_df_emotion.columns.values
 scores = student_scores_df_emotion.iloc[0].values
@@ -309,8 +310,11 @@ for label, angle, score in zip(labels, angles, scores):
 ax.set_yticklabels([])
 
 # Streamlit에 그래프 표시
-col1, col2, col3 = st.columns([2,6,2])
+col1, col2, col3 = st.columns([3, 7, 3]) # 화면을 세 부분으로 나눔
 
-with col2:
+with col1: 
+    st.write(student_scores_df_emotion_transposed )
+
+with col2: # 가운데 컬럼에 그래프를 표시
     st.pyplot(fig)
 
