@@ -228,11 +228,11 @@ character_weaknesses = highest_score_color_info['성격상 약점']
 
 
 st.markdown('<br>', unsafe_allow_html=True)
-st.write(f'<div class="custom-box">성격성강점</div>',unsafe_allow_html=True)
+st.write(f'<div class="custom-box">성격상 강점</div>',unsafe_allow_html=True)
 st.text(f"{character_strengths}")
 
 st.markdown('<br>', unsafe_allow_html=True)
-st.write(f'<div class="custom-box">성격성약점</div>',unsafe_allow_html=True)
+st.write(f'<div class="custom-box">성격상 약점</div>',unsafe_allow_html=True)
 st.text(f"{character_weaknesses}")
 
 # 추천 직업 출력
