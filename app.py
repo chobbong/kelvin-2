@@ -306,7 +306,7 @@ data = {
 
 df = pd.DataFrame(data)
 # 스트림릿에 표를 나타냅니다.
-st.write(df.set_index('NO'))
+st.dataframe(df.set_index('NO'), width=580)
 
 
 responsibility = sorted_scores_df_uploaded_emotion['책임감'][selected_student]
