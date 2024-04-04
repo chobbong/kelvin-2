@@ -389,16 +389,16 @@ df = pd.DataFrame(data_emotion)
 st.write(df.set_index('구분'))
 
 score_ratio = {
-     '책임감': responsibility_ratio,
-     '사교성': sociability_ratio,
-     '자기표현': self_expression_ratio,
-     '자존감': self_esteem_ratio,
-     '공감능력': empathy_ratio,
-     '자기효능감': self_efficacy_ratio 
+     '책임감': responsibility,
+     '사교성': sociability,
+     '자기표현': self_expression,
+     '자존감': self_esteem,
+     '공감능력': empathyo,
+     '자기효능감': self_efficacy 
 }
 
 # 백분율 문자열을 실수로 변환
-scores = [float(rate[:-1]) for rate in score_ratio.values()]
+scores = list(score_ratio.values())
 
 # 라벨
 labels = list(score_ratio.keys())
