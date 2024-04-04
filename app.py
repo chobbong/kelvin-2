@@ -390,6 +390,7 @@ for category, score in scores.items():
             data_emotion[classification].append('')
 
 df = pd.DataFrame(data_emotion)
+df = df.style.applymap(lambda x: 'text-align: center', subset=['높음', '보통', '낮음'])
 st.write(df.set_index('구분'))
 
 score_ratio = {
