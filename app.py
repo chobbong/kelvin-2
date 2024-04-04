@@ -393,7 +393,7 @@ score_ratio = {
      '사교성': sociability,
      '자기표현': self_expression,
      '자존감': self_esteem,
-     '공감능력': empathyo,
+     '공감능력': empathy,
      '자기효능감': self_efficacy 
 }
 
