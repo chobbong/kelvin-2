@@ -417,7 +417,7 @@ ax.plot(angles, scores, color='blue', linewidth=1)
 
 # Annotate each point with its score
 for label, angle, score in zip(labels, angles, scores):
-    ax.text(angle, score, f"{int(score)}%", ha='center', va='center', fontsize=15, color='blue')
+    ax.text(angle, score, int(score), ha='center', va='center', fontsize=15, color='blue')
 
 # 라벨 위치 설정
 ax.set_thetagrids(np.degrees(angles[:-1]), labels)
