@@ -256,7 +256,7 @@ color_info_1 = {
 # DataFrame으로 변환
 df_color = pd.DataFrame(color_info_1, index=["1", "2", "3", "4"])
 
-st.table(df_color)
+st.write(df_color)
 
 color_info_2 = { 
     "초록": ["책임감과 성실함", "예의바른, 겸손함", "이해심, 평화적, 갈등 해결", "이기심, 소심함, 소극적"],
