@@ -323,19 +323,19 @@ self_efficacy = sorted_scores_df_uploaded_emotion['자기효능감'][selected_st
 responsibility_ratio = responsibility / 35
 responsibility_ratio = f"{responsibility_ratio * 100:.0f}%"
 
-sociability_ratio = sociability / 35
+sociability_ratio = sociability / 45
 sociability_ratio = f"{sociability_ratio * 100:.0f}%"
 
 self_expression_ratio = self_expression / 35
 self_expression_ratio = f"{self_expression_ratio * 100:.0f}%"
 
-self_esteem_ratio =self_esteem / 35
+self_esteem_ratio =self_esteem / 30
 self_esteem_ratio = f"{self_esteem_ratio * 100:.0f}%"
 
-empathy_ratio =  empathy / 35
+empathy_ratio =  empathy / 30
 empathy_ratio = f"{empathy_ratio * 100:.0f}%"
 
-self_efficacy_ratio = self_efficacy / 35
+self_efficacy_ratio = self_efficacy / 30
 self_efficacy_ratio = f"{self_efficacy_ratio * 100:.0f}%"
 
 # 홍길동의 각 항목별 점수
@@ -367,8 +367,8 @@ data_emotion = {
     '낮음': [],
     '점수': [scores['책임감'], scores['사교성'], scores['자기표현'], scores['자존감'], scores['공감능력'], scores['자기효능감']],
     '비중': [responsibility_ratio, sociability_ratio, self_expression_ratio, self_esteem_ratio, empathy_ratio, self_efficacy_ratio],  # 비중은 여기서는 계산하지 않고 비워둡니다.
-    '높음(기준)': ['35~25', '45~33', '35~26', '30~22', '30~22', '30~22'],
-    '보통(기준)': ['24~16', '32~21', '25~16', '21~14', '21~14', '21~14'],
+    '높음(기준)': ['35~26', '45~33', '35~26', '30~22', '30~22', '30~22'],
+    '보통(기준)': ['25~16', '32~21', '25~16', '21~14', '21~14', '21~14'],
     '낮음(기준)': ['15~7', '20~9', '15~7', '13~6', '13~6', '13~6']
 }
 
