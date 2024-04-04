@@ -423,7 +423,7 @@ for label, angle, score in zip(labels, angles, scores):
 ax.set_thetagrids(np.degrees(angles[:-1]), labels)
 
 # 원을 10%부터 100%까지 설정
-yticks = np.linspace(10, 100, 10)  # 0.1부터 1.0까지 10개의 틱 생성
+yticks = np.linspace(10, 50, 5)  # 0.1부터 1.0까지 10개의 틱 생성
 ax.set_yticks(yticks)  # y축 틱 설정
 
 col1, col2, col3 = st.columns([5, 7, 2])
