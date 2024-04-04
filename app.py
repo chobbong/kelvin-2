@@ -238,7 +238,7 @@ st.text(f"{character_weaknesses}")
 # 추천 직업 출력
 st.markdown('<br>', unsafe_allow_html=True)
 st.write(f'<div class="custom-box">추천 직업</div>',unsafe_allow_html=True)
-st.write(f"{highest_score_color_info['추천 직업']}")
+st.text(f"{highest_score_color_info['추천 직업']}")
 
 st.markdown("""
 #### 컬러별 특성
