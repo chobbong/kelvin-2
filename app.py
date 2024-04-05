@@ -239,7 +239,16 @@ st.text(f"{character_weaknesses}")
 # 추천 직업 출력
 st.markdown('<br>', unsafe_allow_html=True)
 st.write(f'<div class="custom-box">추천 직업</div>',unsafe_allow_html=True)
-st.text(f"{highest_score_color_info['추천 직업']}")
+st.write(f'''
+    <style>
+    .custom-box {{
+        white-space: pre-wrap; /* 공백과 줄바꿈을 유지하면서 필요에 따라 자동으로 줄바꿈 */
+        max-width: 100%; /* 박스의 최대 너비를 제한 */
+        overflow-wrap: break-word; /* 단어가 너무 길어 줄바꿈이 필요한 경우 단어 내에서도 줄바꿈 */
+    }}
+    </style>
+    <div class="custom-box">{highest_score_color_info['추천 직업']}</div>
+''', unsafe_allow_html=True)
 
 st.markdown("""
 #### 컬러별 특성 설명
