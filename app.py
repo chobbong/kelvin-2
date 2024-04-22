@@ -39,7 +39,30 @@ score_sheet = score_sheet.drop(columns=score_sheet.columns[0])
 
 # 재산정된 점수를 저장할 DataFrame 생성
 score_adjusted = score_sheet.copy()
+score_adjusted_color = score_adjusted.set_index('Name').transpose()
 
+
+# 데이터프레임을 딕셔너리로 전환합니다.
+df_dict_color = score_adjusted_color.to_dict(orient='index')
+
+# 'character' 시트의 색깔 정보를 사용하여 문제 ID를 색깔별로 그룹화합니다.
+color_groups_new = character_sheet[['Question', 'Color']].set_index('Question')['Color'].to_dict()
+
+# 학생별로 각 색깔에 대한 합산 점수를 계산하기 위한 딕셔너리를 초기화합니다.
+student_color_scores_1 = {student: {color: 0 for color in set(color_groups_new.values())} for student in score_adjusted_color.columns}
+
+# 점수 데이터를 사용하여 각 문제에 대한 점수를 가져와 색깔 그룹에 맞춰 합산합니다.
+for problem_id, scores in df_dict_color.items():
+    color = color_groups_new.get(problem_id)
+    for student, score in scores.items():
+        student_color_scores_1[student][color] += score
+        
+student_color_scores_df = pd.DataFrame(student_color_scores_1).T
+
+# 각 학생별로 점수가 높은 순으로 색깔을 정렬합니다.
+sorted_scores_df = student_color_scores_df .apply(lambda x: x.sort_values(ascending=False), axis=1)
+
+#--------------------------------------------기존 코드------------------------------------------------
 reverse_dict_int = {key: int(value) for key, value in reverse_dict.items()}
 
 # score_sheet의 원본 점수를 바탕으로 역점 반영 점수 재산정
@@ -89,15 +112,15 @@ st.markdown("""
 st.markdown(f"<h2 style='text-align: left; color: black;'>휴먼컬러/정서 행동 특성 검사 결과({type_selected})</h2>", unsafe_allow_html=True)
 
 # DataFrame에서 학생 이름 목록 추출
-students_list = sorted_scores_df_uploaded.index.tolist()
+students_list = sorted_scores_df.index.tolist()
 
 # st.selectbox를 사용하여 학생 이름 선택
 selected_student = st.selectbox("학생 이름을 선택하세요:", students_list)
 
 # 선택된 학생의 점수를 DataFrame 형태로 표시
 def get_sorted_scores(student_name):
-    if student_name in sorted_scores_df_uploaded.index:
-        student_scores = sorted_scores_df_uploaded.loc[student_name].sort_values(ascending=False)
+    if student_name in sorted_scores_df.index:
+        student_scores = sorted_scores_df.loc[student_name].sort_values(ascending=False)
         return pd.DataFrame(student_scores).T
     else:
         return pd.DataFrame({"Error": ["Student name not found."]})
